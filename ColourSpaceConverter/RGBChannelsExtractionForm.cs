@@ -16,5 +16,16 @@ namespace ColourSpaceConverter
         {
             InitializeComponent();
         }
+
+        private void RGBChannelsExtractionForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buildHistogramsButton_Click(object sender, EventArgs e)
+        {
+            var histogramForm = new HistogramForm();
+            histogramForm.ShowDialog();
+        }
     }
 }
