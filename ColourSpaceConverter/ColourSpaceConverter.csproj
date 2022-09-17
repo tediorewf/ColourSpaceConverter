@@ -49,12 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FastBitmap.cs" />
-    <Compile Include="HistogramForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="HistogramForm.Designer.cs">
-      <DependentUpon>HistogramForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="ColourHistogram.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,9 +76,6 @@
     <Compile Include="RGBToHSVForm.Designer.cs">
       <DependentUpon>RGBToHSVForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="HistogramForm.resx">
-      <DependentUpon>HistogramForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -118,5 +110,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

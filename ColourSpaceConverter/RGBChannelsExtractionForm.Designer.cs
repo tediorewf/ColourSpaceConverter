@@ -32,233 +32,156 @@
             this.redChannelPictureBox = new System.Windows.Forms.PictureBox();
             this.greenChannelPictureBox = new System.Windows.Forms.PictureBox();
             this.blueChannelPictureBox = new System.Windows.Forms.PictureBox();
-            this.baseImageLabel = new System.Windows.Forms.Label();
-            this.redChannelLabel = new System.Windows.Forms.Label();
-            this.greenChannelLabel = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.chooseImageButton = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
-            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
-            this.buildHystogramsButton = new System.Windows.Forms.Button();
+            this.histogramPictureBox = new System.Windows.Forms.PictureBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.baseImagePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.redChannelPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.greenChannelPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blueChannelPictureBox)).BeginInit();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.flowLayoutPanel3.SuspendLayout();
-            this.flowLayoutPanel4.SuspendLayout();
-            this.flowLayoutPanel5.SuspendLayout();
-            this.flowLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
-            this.flowLayoutPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.histogramPictureBox)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // baseImagePictureBox
             // 
-            this.baseImagePictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.baseImagePictureBox.Location = new System.Drawing.Point(3, 3);
+            this.baseImagePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.baseImagePictureBox.Location = new System.Drawing.Point(7, 33);
             this.baseImagePictureBox.Name = "baseImagePictureBox";
-            this.baseImagePictureBox.Size = new System.Drawing.Size(300, 400);
+            this.baseImagePictureBox.Size = new System.Drawing.Size(603, 480);
+            this.baseImagePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.baseImagePictureBox.TabIndex = 0;
             this.baseImagePictureBox.TabStop = false;
             // 
             // redChannelPictureBox
             // 
-            this.redChannelPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.redChannelPictureBox.Location = new System.Drawing.Point(3, 3);
+            this.redChannelPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.redChannelPictureBox.Location = new System.Drawing.Point(7, 30);
             this.redChannelPictureBox.Name = "redChannelPictureBox";
-            this.redChannelPictureBox.Size = new System.Drawing.Size(300, 400);
+            this.redChannelPictureBox.Size = new System.Drawing.Size(609, 526);
+            this.redChannelPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.redChannelPictureBox.TabIndex = 1;
             this.redChannelPictureBox.TabStop = false;
             // 
             // greenChannelPictureBox
             // 
-            this.greenChannelPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.greenChannelPictureBox.Location = new System.Drawing.Point(3, 3);
+            this.greenChannelPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.greenChannelPictureBox.Location = new System.Drawing.Point(642, 30);
             this.greenChannelPictureBox.Name = "greenChannelPictureBox";
-            this.greenChannelPictureBox.Size = new System.Drawing.Size(300, 400);
+            this.greenChannelPictureBox.Size = new System.Drawing.Size(609, 526);
+            this.greenChannelPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.greenChannelPictureBox.TabIndex = 2;
             this.greenChannelPictureBox.TabStop = false;
             // 
             // blueChannelPictureBox
             // 
-            this.blueChannelPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.blueChannelPictureBox.Location = new System.Drawing.Point(3, 3);
+            this.blueChannelPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.blueChannelPictureBox.Location = new System.Drawing.Point(1275, 30);
             this.blueChannelPictureBox.Name = "blueChannelPictureBox";
-            this.blueChannelPictureBox.Size = new System.Drawing.Size(300, 400);
+            this.blueChannelPictureBox.Size = new System.Drawing.Size(609, 526);
+            this.blueChannelPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.blueChannelPictureBox.TabIndex = 3;
             this.blueChannelPictureBox.TabStop = false;
             // 
-            // baseImageLabel
-            // 
-            this.baseImageLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.baseImageLabel.AutoSize = true;
-            this.baseImageLabel.Location = new System.Drawing.Point(3, 406);
-            this.baseImageLabel.Name = "baseImageLabel";
-            this.baseImageLabel.Size = new System.Drawing.Size(249, 25);
-            this.baseImageLabel.TabIndex = 4;
-            this.baseImageLabel.Text = "Исходное изображение";
-            // 
-            // redChannelLabel
-            // 
-            this.redChannelLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.redChannelLabel.AutoSize = true;
-            this.redChannelLabel.Location = new System.Drawing.Point(3, 406);
-            this.redChannelLabel.Name = "redChannelLabel";
-            this.redChannelLabel.Size = new System.Drawing.Size(212, 25);
-            this.redChannelLabel.TabIndex = 5;
-            this.redChannelLabel.Text = "Составляющая RED";
-            // 
-            // greenChannelLabel
-            // 
-            this.greenChannelLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.greenChannelLabel.AutoSize = true;
-            this.greenChannelLabel.Location = new System.Drawing.Point(3, 406);
-            this.greenChannelLabel.Name = "greenChannelLabel";
-            this.greenChannelLabel.Size = new System.Drawing.Size(242, 25);
-            this.greenChannelLabel.TabIndex = 6;
-            this.greenChannelLabel.Text = "Составляющая GREEN";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 406);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(223, 25);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Составляющая BLUE";
-            // 
             // chooseImageButton
             // 
-            this.chooseImageButton.Location = new System.Drawing.Point(3, 3);
-            this.chooseImageButton.Name = "chooseImageButton";
-            this.chooseImageButton.Size = new System.Drawing.Size(634, 92);
-            this.chooseImageButton.TabIndex = 8;
-            this.chooseImageButton.Text = "Выбрать изображение";
-            this.chooseImageButton.UseVisualStyleBackColor = true;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.baseImagePictureBox);
-            this.flowLayoutPanel1.Controls.Add(this.baseImageLabel);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(319, 438);
-            this.flowLayoutPanel1.TabIndex = 9;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.Controls.Add(this.redChannelPictureBox);
-            this.flowLayoutPanel2.Controls.Add(this.redChannelLabel);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(328, 3);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(309, 438);
-            this.flowLayoutPanel2.TabIndex = 10;
-            // 
-            // flowLayoutPanel3
-            // 
-            this.flowLayoutPanel3.Controls.Add(this.greenChannelPictureBox);
-            this.flowLayoutPanel3.Controls.Add(this.greenChannelLabel);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(643, 3);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(312, 439);
-            this.flowLayoutPanel3.TabIndex = 11;
-            // 
-            // flowLayoutPanel4
-            // 
-            this.flowLayoutPanel4.Controls.Add(this.blueChannelPictureBox);
-            this.flowLayoutPanel4.Controls.Add(this.label3);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(961, 3);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(313, 439);
-            this.flowLayoutPanel4.TabIndex = 12;
-            // 
-            // flowLayoutPanel5
-            // 
-            this.flowLayoutPanel5.Controls.Add(this.flowLayoutPanel1);
-            this.flowLayoutPanel5.Controls.Add(this.flowLayoutPanel2);
-            this.flowLayoutPanel5.Controls.Add(this.flowLayoutPanel3);
-            this.flowLayoutPanel5.Controls.Add(this.flowLayoutPanel4);
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 3);
-            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(1299, 449);
-            this.flowLayoutPanel5.TabIndex = 13;
-            // 
-            // flowLayoutPanel6
-            // 
-            this.flowLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.chooseImageButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel5);
-            this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel7);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(14, 12);
-            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(1311, 572);
-            this.flowLayoutPanel6.TabIndex = 14;
+            this.chooseImageButton.Location = new System.Drawing.Point(7, 525);
+            this.chooseImageButton.Name = "chooseImageButton";
+            this.chooseImageButton.Size = new System.Drawing.Size(603, 50);
+            this.chooseImageButton.TabIndex = 8;
+            this.chooseImageButton.Text = "Выбрать";
+            this.chooseImageButton.UseVisualStyleBackColor = true;
+            this.chooseImageButton.Click += new System.EventHandler(this.chooseImageButton_Click);
             // 
             // fileSystemWatcher1
             // 
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
-            // flowLayoutPanel7
+            // histogramPictureBox
             // 
-            this.flowLayoutPanel7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.histogramPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel7.Controls.Add(this.chooseImageButton);
-            this.flowLayoutPanel7.Controls.Add(this.buildHystogramsButton);
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(3, 458);
-            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(1299, 100);
-            this.flowLayoutPanel7.TabIndex = 14;
+            this.histogramPictureBox.BackColor = System.Drawing.SystemColors.Control;
+            this.histogramPictureBox.Location = new System.Drawing.Point(6, 30);
+            this.histogramPictureBox.Name = "histogramPictureBox";
+            this.histogramPictureBox.Size = new System.Drawing.Size(1269, 545);
+            this.histogramPictureBox.TabIndex = 1;
+            this.histogramPictureBox.TabStop = false;
             // 
-            // buildHystogramsButton
+            // groupBox2
             // 
-            this.buildHystogramsButton.Location = new System.Drawing.Point(643, 3);
-            this.buildHystogramsButton.Name = "buildHystogramsButton";
-            this.buildHystogramsButton.Size = new System.Drawing.Size(631, 92);
-            this.buildHystogramsButton.TabIndex = 9;
-            this.buildHystogramsButton.Text = "Построить гистограммы";
-            this.buildHystogramsButton.UseVisualStyleBackColor = true;
-            this.buildHystogramsButton.Click += new System.EventHandler(this.buildHistogramsButton_Click);
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.blueChannelPictureBox);
+            this.groupBox2.Controls.Add(this.greenChannelPictureBox);
+            this.groupBox2.Controls.Add(this.redChannelPictureBox);
+            this.groupBox2.Location = new System.Drawing.Point(12, 605);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(1903, 562);
+            this.groupBox2.TabIndex = 16;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Цветовые составляющие";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.histogramPictureBox);
+            this.groupBox1.Location = new System.Drawing.Point(634, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1281, 591);
+            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Цветовая гистограмма";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.baseImagePictureBox);
+            this.groupBox3.Controls.Add(this.chooseImageButton);
+            this.groupBox3.Location = new System.Drawing.Point(12, 12);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(616, 591);
+            this.groupBox3.TabIndex = 17;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Исходное изображение";
             // 
             // RGBChannelsExtractionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1337, 596);
-            this.Controls.Add(this.flowLayoutPanel6);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.ClientSize = new System.Drawing.Size(1932, 1179);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RGBChannelsExtractionForm";
             this.Text = "Выделение из полноцветного изображения каждого из каналов R, G, B";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.RGBChannelsExtractionForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.baseImagePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.redChannelPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.greenChannelPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.blueChannelPictureBox)).EndInit();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
-            this.flowLayoutPanel3.ResumeLayout(false);
-            this.flowLayoutPanel3.PerformLayout();
-            this.flowLayoutPanel4.ResumeLayout(false);
-            this.flowLayoutPanel4.PerformLayout();
-            this.flowLayoutPanel5.ResumeLayout(false);
-            this.flowLayoutPanel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
-            this.flowLayoutPanel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.histogramPictureBox)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -269,19 +192,11 @@
         private System.Windows.Forms.PictureBox redChannelPictureBox;
         private System.Windows.Forms.PictureBox greenChannelPictureBox;
         private System.Windows.Forms.PictureBox blueChannelPictureBox;
-        private System.Windows.Forms.Label baseImageLabel;
-        private System.Windows.Forms.Label redChannelLabel;
-        private System.Windows.Forms.Label greenChannelLabel;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button chooseImageButton;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
-        private System.Windows.Forms.Button buildHystogramsButton;
+        private System.Windows.Forms.PictureBox histogramPictureBox;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
