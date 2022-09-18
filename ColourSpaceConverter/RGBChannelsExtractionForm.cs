@@ -131,26 +131,25 @@ namespace ColourSpaceConverter
                     int relativeX = x * stepSize;
 
                     int relativeY = histogramBitmap.Height - redChannelFrequencies[x] * minY * histogramBitmap.Height / maxY;
-                    for (int y = histogramBitmap.Height - 1; y >= relativeY; y--)
-                    {
-                        fastHistogramBitmap[relativeX, y] = Color.Red;
-                    }
+                    DrawVerticalLine(fastHistogramBitmap, relativeX, relativeY, Color.Red);
 
                     relativeY = histogramBitmap.Height - greenChannelFrequencies[x] * minY * histogramBitmap.Height / maxY;
-                    for (int y = histogramBitmap.Height - 1; y >= relativeY; y--)
-                    {
-                        fastHistogramBitmap[relativeX, y] = Color.Green;
-                    }
+                    DrawVerticalLine(fastHistogramBitmap, relativeX, relativeY, Color.Green);
 
                     relativeY = histogramBitmap.Height - blueChannelFrequencies[x] * minY * histogramBitmap.Height / maxY;
-                    for (int y = histogramBitmap.Height - 1; y >= relativeY; y--)
-                    {
-                        fastHistogramBitmap[relativeX, y] = Color.Blue;
-                    }
+                    DrawVerticalLine(fastHistogramBitmap, relativeX, relativeY, Color.Blue);
                 }
             }
 
             return histogramBitmap;
+        }
+
+        private static void DrawVerticalLine(FastBitmap fastBitmap, int relativeX, int relativeY, Color colour)
+        {
+            for (int y = fastBitmap.Height - 1; y >= relativeY; y--)
+            {
+                fastBitmap[relativeX, y] = colour;
+            }
         }
     }
 }
