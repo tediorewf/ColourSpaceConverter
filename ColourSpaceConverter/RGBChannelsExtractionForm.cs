@@ -7,14 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FastBitmap;
 
 namespace ColourSpaceConverter
 {
+    using FastBitmap;
+
     public partial class RGBChannelsExtractionForm : Form
     {
-        //private Bitmap[] colourChannels;
-
         public RGBChannelsExtractionForm()
         {
             InitializeComponent();
@@ -41,10 +40,12 @@ namespace ColourSpaceConverter
             {
                 var baseBitmap = new Bitmap(filename);
                 var colourChannels = ExctractChannels(baseBitmap);
+                var histogramBitmap = CreateHistogram(baseBitmap, histogramPictureBox.Size);
                 baseImagePictureBox.Image = baseBitmap;
                 redChannelPictureBox.Image = colourChannels[0];
                 blueChannelPictureBox.Image = colourChannels[1];
                 greenChannelPictureBox.Image = colourChannels[2];
+                histogramPictureBox.Image = histogramBitmap;
             }
             catch (Exception ex)
             {
@@ -55,23 +56,27 @@ namespace ColourSpaceConverter
         private static Bitmap[] ExctractChannels(Bitmap baseBitmap)
         {
             var colourChannels = new Bitmap[3];
-            for (int _ = 0; _ < 3; _++)
+            for (int i = 0; i < 3; i++)
             {
-                colourChannels[_] = new Bitmap(baseBitmap.Width, baseBitmap.Height);
+                colourChannels[i] = new Bitmap(baseBitmap.Width, baseBitmap.Height);
             }
-            using (var fastBaseBitmap = new FastBitmap.FastBitmap(baseBitmap))
+
+            using (var fastBaseBitmap = new FastBitmap(baseBitmap))
+            using (var fastRedChannelBitmap = new FastBitmap(colourChannels[0]))
+            using (var fastGreenChannelBitmap = new FastBitmap(colourChannels[1]))
+            using (var fastBlueChannelBitmap = new FastBitmap(colourChannels[2]))
             {
                 for (int x = 0; x < baseBitmap.Width; x++)
                 {
                     for (int y = 0; y < baseBitmap.Height; y++)
                     {
                         var currentPixelColour = fastBaseBitmap[x, y];
-                        colourChannels[0].SetPixel(x, y, 
-                            Color.FromArgb(currentPixelColour.A, currentPixelColour.R, 0, 0));
-                        colourChannels[1].SetPixel(x, y,
-                            Color.FromArgb(currentPixelColour.A, 0, currentPixelColour.G, 0));
-                        colourChannels[2].SetPixel(x, y, 
-                            Color.FromArgb(currentPixelColour.A, 0, 0, currentPixelColour.B));
+                        fastRedChannelBitmap[x, y] = Color.FromArgb(
+                            currentPixelColour.A, currentPixelColour.R, 0, 0);
+                        fastGreenChannelBitmap[x, y] = Color.FromArgb(
+                            currentPixelColour.A, 0, currentPixelColour.G, 0);
+                        fastBlueChannelBitmap[x, y] = Color.FromArgb(
+                            currentPixelColour.A, 0, 0, currentPixelColour.B);
                     }
                 }
             }
@@ -79,9 +84,73 @@ namespace ColourSpaceConverter
             return colourChannels;
         }
 
-        private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        private static Bitmap CreateHistogram(Bitmap baseBitmap, Size size)
         {
+            var histogramBitmap = new Bitmap(size.Width, size.Height);
 
+            var redChannelFrequencies = new SortedDictionary<int, int>();
+            var greenChannelFrequencies = new SortedDictionary<int, int>();
+            var blueChannelFrequencies = new SortedDictionary<int, int>();
+
+            for (int i = 0; i < 256; i++)
+            {
+                redChannelFrequencies[i] = 0;
+                greenChannelFrequencies[i] = 0;
+                blueChannelFrequencies[i] = 0;
+            }
+
+            using (var fastBaseBitmap = new FastBitmap(baseBitmap))
+            using (var fastHistogramBitmap = new FastBitmap(histogramBitmap))
+            {
+                int minY = int.MaxValue;
+                int maxY = int.MinValue;
+
+                for (int x = 0; x < baseBitmap.Width; x++)
+                {
+                    for (int y = 0; y < baseBitmap.Height; y++)
+                    {
+                        var currentPixelColour = fastBaseBitmap[x, y];
+
+                        redChannelFrequencies[currentPixelColour.R] += 1;
+                        minY = Math.Min(minY, redChannelFrequencies[currentPixelColour.R]);
+                        maxY = Math.Max(maxY, redChannelFrequencies[currentPixelColour.R]);
+
+                        greenChannelFrequencies[currentPixelColour.G] += 1;
+                        minY = Math.Min(minY, greenChannelFrequencies[currentPixelColour.G]);
+                        maxY = Math.Max(maxY, greenChannelFrequencies[currentPixelColour.G]);
+
+                        blueChannelFrequencies[currentPixelColour.B] += 1;
+                        minY = Math.Min(minY, blueChannelFrequencies[currentPixelColour.B]);
+                        maxY = Math.Max(maxY, blueChannelFrequencies[currentPixelColour.B]);
+                    }
+                }
+
+                int stepSize = histogramBitmap.Width / 256;
+                for (int x = 0; x < 256; x++)
+                {
+                    int relativeX = x * stepSize;
+
+                    int relativeY = histogramBitmap.Height - redChannelFrequencies[x] * minY * histogramBitmap.Height / maxY;
+                    for (int y = histogramBitmap.Height - 1; y >= relativeY; y--)
+                    {
+                        fastHistogramBitmap[relativeX, y] = Color.Red;
+                    }
+
+                    relativeY = histogramBitmap.Height - greenChannelFrequencies[x] * minY * histogramBitmap.Height / maxY;
+                    for (int y = histogramBitmap.Height - 1; y >= relativeY; y--)
+                    {
+                        fastHistogramBitmap[relativeX, y] = Color.Green;
+                    }
+
+                    relativeY = histogramBitmap.Height - blueChannelFrequencies[x] * minY * histogramBitmap.Height / maxY;
+                    for (int y = histogramBitmap.Height - 1; y >= relativeY; y--)
+                    {
+                        fastHistogramBitmap[relativeX, y] = Color.Blue;
+                    }
+                }
+            }
+
+            return histogramBitmap;
         }
     }
 }
