@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 
+
 namespace ColourSpaceConverter
 {
+    using FastBitmap;
     public partial class RGBToHSVForm : Form
     {
         Bitmap image;
@@ -58,45 +60,51 @@ namespace ColourSpaceConverter
         //изменить тон
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            for (int x = 0; x < newImage.Width; x++)
+            using (var fast_newImageHSV = new FastBitmap(newImageHSV))
             {
-                for (int y = 0; y < newImage.Height; y++)
+                for (int x = 0; x < fast_newImageHSV.Width; x++)
                 {
-                    Color pixelColor = newImageHSV.GetPixel(x, y);
-                    int R = pixelColor.R;
-                    int G = pixelColor.G;
-                    int B = pixelColor.B;
-                    int H = ToH(R, G, B);
-                    int S = ToS(R, G, B);
-                    int V = ToV(R, G, B);
-
-                    int Proc = trackBar1.Value;
-                    if (Proc<=100)
+                    for (int y = 0; y < fast_newImageHSV.Height; y++)
                     {
-                        H = H * Proc / 100;
-                    }
-                    else
-                    {
-                        H = 360 -  H * (200 - Proc) / 100;
-                    }
+                        Color pixelColor = fast_newImageHSV[x, y];
+                        int R = pixelColor.R;
+                        int G = pixelColor.G;
+                        int B = pixelColor.B;
+                        int H = ToH(R, G, B);
+                        int S = ToS(R, G, B);
+                        int V = ToV(R, G, B);
 
-                    R = ToR(H, S, V);
-                    G = ToG(H, S, V);
-                    B = ToB(H, S, V);
-                    Color newColor = Color.FromArgb(R, G, B);
-                    newImageHSV.SetPixel(x, y, newColor);
+                        int Proc = trackBar1.Value;
+                        if (Proc <= 100)
+                        {
+                            H = H * Proc / 100;
+                        }
+                        else
+                        {
+                            H = 360 - H * (200 - Proc) / 100;
+                        }
+
+                        R = ToR(H, S, V);
+                        G = ToG(H, S, V);
+                        B = ToB(H, S, V);
+                        Color newColor = Color.FromArgb(R, G, B);
+                        //newImageHSV.SetPixel(x, y, newColor);
+                        fast_newImageHSV[x, y] = newColor;
+                    }
                 }
             }
-            pictureBox2.Image = newImageHSV;
+                pictureBox2.Image = newImageHSV;
         }
         //изменить насыщенность
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
-            for (int x = 0; x < newImage.Width; x++)
+            using (var fast_newImageHSV = new FastBitmap(newImageHSV))
             {
-                for (int y = 0; y < newImage.Height; y++)
+                for (int x = 0; x < fast_newImageHSV.Width; x++)
+            {
+                for (int y = 0; y < fast_newImageHSV.Height; y++)
                 {
-                    Color pixelColor = newImageHSV.GetPixel(x, y);
+                    Color pixelColor = fast_newImageHSV[x, y];
                     int R = pixelColor.R;
                     int G = pixelColor.G;
                     int B = pixelColor.B;
@@ -118,41 +126,47 @@ namespace ColourSpaceConverter
                     G = ToG(H, S, V);
                     B = ToB(H, S, V);
                     Color newColor = Color.FromArgb(R, G, B);
-                    newImageHSV.SetPixel(x, y, newColor);
+                    //newImageHSV.SetPixel(x, y, newColor);
+                    fast_newImageHSV[x, y] = newColor;
                 }
             }
+            } 
             pictureBox2.Image = newImageHSV;
         }
         //изменить яркость
         private void trackBar3_Scroll(object sender, EventArgs e)
         {
-            for (int x = 0; x < newImage.Width; x++)
+            using (var fast_newImageHSV = new FastBitmap(newImageHSV))
             {
-                for (int y = 0; y < newImage.Height; y++)
+                for (int x = 0; x < fast_newImageHSV.Width; x++)
                 {
-                    Color pixelColor = newImageHSV.GetPixel(x, y);
-                    int R = pixelColor.R;
-                    int G = pixelColor.G;
-                    int B = pixelColor.B;
-                    int H = ToH(R, G, B);
-                    int S = ToS(R, G, B);
-                    int V = ToV(R, G, B);
-
-                    int Proc = trackBar3.Value;
-                    if (Proc <= 100)
+                    for (int y = 0; y < fast_newImageHSV.Height; y++)
                     {
-                        V = V * Proc / 100;
-                    }
-                    else
-                    {
-                        V = 100 - V * (200 - Proc) / 100;
-                    }
+                        Color pixelColor = fast_newImageHSV[x, y];
+                        int R = pixelColor.R;
+                        int G = pixelColor.G;
+                        int B = pixelColor.B;
+                        int H = ToH(R, G, B);
+                        int S = ToS(R, G, B);
+                        int V = ToV(R, G, B);
 
-                    R = ToR(H, S, V);
-                    G = ToG(H, S, V);
-                    B = ToB(H, S, V);
-                    Color newColor = Color.FromArgb(R, G, B);
-                    newImageHSV.SetPixel(x, y, newColor);
+                        int Proc = trackBar3.Value;
+                        if (Proc <= 100)
+                        {
+                            V = V * Proc / 100;
+                        }
+                        else
+                        {
+                            V = 100 - V * (200 - Proc) / 100;
+                        }
+
+                        R = ToR(H, S, V);
+                        G = ToG(H, S, V);
+                        B = ToB(H, S, V);
+                        Color newColor = Color.FromArgb(R, G, B);
+                        //newImageHSV.SetPixel(x, y, newColor);
+                        fast_newImageHSV[x, y] = newColor;
+                    }
                 }
             }
             pictureBox2.Image = newImageHSV;
