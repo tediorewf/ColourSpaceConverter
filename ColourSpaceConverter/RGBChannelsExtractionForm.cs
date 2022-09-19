@@ -88,9 +88,9 @@ namespace ColourSpaceConverter
         {
             var histogramBitmap = new Bitmap(size.Width, size.Height);
 
-            var redChannelFrequencies = new SortedDictionary<int, int>();
-            var greenChannelFrequencies = new SortedDictionary<int, int>();
-            var blueChannelFrequencies = new SortedDictionary<int, int>();
+            var redChannelFrequencies = new int[256];
+            var greenChannelFrequencies = new int[256];
+            var blueChannelFrequencies = new int[256];
 
             for (int i = 0; i < 256; i++)
             {
