@@ -10,96 +10,96 @@ using System.Windows.Forms;
 
 namespace ColourSpaceConverter
 {
-    using FastBitmap;
+using FastBitmap;
 
-    public partial class RGBChannelsExtractionForm : Form
+public partial class RGBChannelsExtractionForm : Form
+{
+    public RGBChannelsExtractionForm()
     {
-        public RGBChannelsExtractionForm()
+        InitializeComponent();
+    }
+
+    private void RGBChannelsExtractionForm_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    private void chooseImageButton_Click(object sender, EventArgs e)
+    {
+        var ofd = new OpenFileDialog();
+        ofd.Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
+        if (ofd.ShowDialog() == DialogResult.OK)
         {
-            InitializeComponent();
+            TrySetImage(ofd.FileName);
+        }
+    }
+
+    private void TrySetImage(string filename)
+    {
+        try
+        {
+            var baseBitmap = new Bitmap(filename);
+            var colourChannels = ExctractChannels(baseBitmap);
+            var histogramBitmap = CreateHistogram(baseBitmap, histogramPictureBox.Size);
+            baseImagePictureBox.Image = baseBitmap;
+            redChannelPictureBox.Image = colourChannels[0];
+            blueChannelPictureBox.Image = colourChannels[1];
+            greenChannelPictureBox.Image = colourChannels[2];
+            histogramPictureBox.Image = histogramBitmap;
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK);
+        }
+    }
+
+    private static Bitmap[] ExctractChannels(Bitmap baseBitmap)
+    {
+        var colourChannels = new Bitmap[3];
+        for (int i = 0; i < 3; i++)
+        {
+            colourChannels[i] = new Bitmap(baseBitmap.Width, baseBitmap.Height);
         }
 
-        private void RGBChannelsExtractionForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chooseImageButton_Click(object sender, EventArgs e)
-        {
-            var ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                TrySetImage(ofd.FileName);
-            }
-        }
-
-        private void TrySetImage(string filename)
-        {
-            try
-            {
-                var baseBitmap = new Bitmap(filename);
-                var colourChannels = ExctractChannels(baseBitmap);
-                var histogramBitmap = CreateHistogram(baseBitmap, histogramPictureBox.Size);
-                baseImagePictureBox.Image = baseBitmap;
-                redChannelPictureBox.Image = colourChannels[0];
-                blueChannelPictureBox.Image = colourChannels[1];
-                greenChannelPictureBox.Image = colourChannels[2];
-                histogramPictureBox.Image = histogramBitmap;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK);
-            }
-        }
-
-        private static Bitmap[] ExctractChannels(Bitmap baseBitmap)
-        {
-            var colourChannels = new Bitmap[3];
-            for (int i = 0; i < 3; i++)
-            {
-                colourChannels[i] = new Bitmap(baseBitmap.Width, baseBitmap.Height);
-            }
-
-            using (var fastBaseBitmap = new FastBitmap(baseBitmap))
+        using (var fastBaseBitmap = new FastBitmap(baseBitmap))
             using (var fastRedChannelBitmap = new FastBitmap(colourChannels[0]))
-            using (var fastGreenChannelBitmap = new FastBitmap(colourChannels[1]))
-            using (var fastBlueChannelBitmap = new FastBitmap(colourChannels[2]))
-            {
-                for (int x = 0; x < baseBitmap.Width; x++)
-                {
-                    for (int y = 0; y < baseBitmap.Height; y++)
+                using (var fastGreenChannelBitmap = new FastBitmap(colourChannels[1]))
+                    using (var fastBlueChannelBitmap = new FastBitmap(colourChannels[2]))
                     {
-                        var currentPixelColour = fastBaseBitmap[x, y];
-                        fastRedChannelBitmap[x, y] = Color.FromArgb(
-                            currentPixelColour.A, currentPixelColour.R, 0, 0);
-                        fastGreenChannelBitmap[x, y] = Color.FromArgb(
-                            currentPixelColour.A, 0, currentPixelColour.G, 0);
-                        fastBlueChannelBitmap[x, y] = Color.FromArgb(
-                            currentPixelColour.A, 0, 0, currentPixelColour.B);
+                        for (int x = 0; x < baseBitmap.Width; x++)
+                        {
+                            for (int y = 0; y < baseBitmap.Height; y++)
+                            {
+                                var currentPixelColour = fastBaseBitmap[x, y];
+                                fastRedChannelBitmap[x, y] = Color.FromArgb(
+                                                                 currentPixelColour.A, currentPixelColour.R, 0, 0);
+                                fastGreenChannelBitmap[x, y] = Color.FromArgb(
+                                                                   currentPixelColour.A, 0, currentPixelColour.G, 0);
+                                fastBlueChannelBitmap[x, y] = Color.FromArgb(
+                                                                  currentPixelColour.A, 0, 0, currentPixelColour.B);
+                            }
+                        }
                     }
-                }
-            }
 
-            return colourChannels;
+        return colourChannels;
+    }
+
+    private static Bitmap CreateHistogram(Bitmap baseBitmap, Size size)
+    {
+        var histogramBitmap = new Bitmap(size.Width, size.Height);
+
+        var redChannelFrequencies = new int[256];
+        var greenChannelFrequencies = new int[256];
+        var blueChannelFrequencies = new int[256];
+
+        for (int i = 0; i < 256; i++)
+        {
+            redChannelFrequencies[i] = 0;
+            greenChannelFrequencies[i] = 0;
+            blueChannelFrequencies[i] = 0;
         }
 
-        private static Bitmap CreateHistogram(Bitmap baseBitmap, Size size)
-        {
-            var histogramBitmap = new Bitmap(size.Width, size.Height);
-
-            var redChannelFrequencies = new int[256];
-            var greenChannelFrequencies = new int[256];
-            var blueChannelFrequencies = new int[256];
-
-            for (int i = 0; i < 256; i++)
-            {
-                redChannelFrequencies[i] = 0;
-                greenChannelFrequencies[i] = 0;
-                blueChannelFrequencies[i] = 0;
-            }
-
-            using (var fastBaseBitmap = new FastBitmap(baseBitmap))
+        using (var fastBaseBitmap = new FastBitmap(baseBitmap))
             using (var fastHistogramBitmap = new FastBitmap(histogramBitmap))
             {
                 int minY = int.MaxValue;
@@ -141,15 +141,15 @@ namespace ColourSpaceConverter
                 }
             }
 
-            return histogramBitmap;
-        }
+        return histogramBitmap;
+    }
 
-        private static void DrawVerticalLine(FastBitmap fastBitmap, int relativeX, int relativeY, Color colour)
+    private static void DrawVerticalLine(FastBitmap fastBitmap, int relativeX, int relativeY, Color colour)
+    {
+        for (int y = fastBitmap.Height - 1; y >= relativeY; y--)
         {
-            for (int y = fastBitmap.Height - 1; y >= relativeY; y--)
-            {
-                fastBitmap[relativeX, y] = colour;
-            }
+            fastBitmap[relativeX, y] = colour;
         }
     }
+}
 }
