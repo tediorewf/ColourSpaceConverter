@@ -13,8 +13,13 @@ using System.Drawing.Drawing2D;
 namespace ColourSpaceConverter
 {
     using FastBitmap;
+    
     public partial class RGBToHSVForm : Form
     {
+        int tb1 = 100;
+        int tb2 = 100;
+        int tb3 = 100;
+
         Bitmap image;
         Bitmap newImage;
         Bitmap newImageHSV;
@@ -32,7 +37,7 @@ namespace ColourSpaceConverter
                 try
                 {
                     image = new Bitmap(open_dialog.FileName);
-                    newImage = new Bitmap(image.Size.Width, image.Size.Height);
+                    newImage = new Bitmap(660, 526);
                     using (Graphics gr = Graphics.FromImage(newImage))
                     {
                         gr.SmoothingMode = SmoothingMode.HighQuality;
@@ -54,12 +59,26 @@ namespace ColourSpaceConverter
         //сохранить изображение
         private void button2_Click(object sender, EventArgs e)
         {
-            newImageHSV.Save("C:/PictureFromHSVConverter.png");
-            MessageBox.Show("Картинка сохранена в C:/ ");
+            SaveFileDialog open_dialog = new SaveFileDialog();
+            open_dialog.Filter = "Image Files(*.JPG;*.BMP;*.PNG)|*.JPG;*.BMP;*.PNG";
+            if (open_dialog.ShowDialog() == DialogResult.OK) //если в окне была нажата кнопка "ОК"
+            {
+                try
+                {
+                    newImageHSV.Save(open_dialog.FileName);
+                    MessageBox.Show("Картинка сохранена");
+                }
+                catch
+                {
+                    DialogResult rezult = MessageBox.Show("Невозможно сохранить",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
         //изменить тон
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
+            int Proc = trackBar1.Value;
             using (var fast_newImageHSV = new FastBitmap(newImageHSV))
             {
                 for (int x = 0; x < fast_newImageHSV.Width; x++)
@@ -74,16 +93,16 @@ namespace ColourSpaceConverter
                         int S = ToS(R, G, B);
                         int V = ToV(R, G, B);
 
-                        int Proc = trackBar1.Value;
-                        if (Proc <= 100)
+                        
+                        if (Proc <= tb1)
                         {
-                            H = H * Proc / 100;
+                            H = H * Proc / tb1;
                         }
                         else
                         {
-                            H = 360 - H * (200 - Proc) / 100;
+                            H = 360 - H * (200 - Proc) / (200 - tb1);
                         }
-
+                        
                         R = ToR(H, S, V);
                         G = ToG(H, S, V);
                         B = ToB(H, S, V);
@@ -93,11 +112,17 @@ namespace ColourSpaceConverter
                     }
                 }
             }
-                pictureBox2.Image = newImageHSV;
+            tb1 = Proc;
+            if (tb1 == 0)
+            {
+                tb1 = 1;
+            }
+            pictureBox2.Image = newImageHSV;
         }
         //изменить насыщенность
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
+            int Proc = trackBar2.Value;
             using (var fast_newImageHSV = new FastBitmap(newImageHSV))
             {
                 for (int x = 0; x < fast_newImageHSV.Width; x++)
@@ -112,16 +137,16 @@ namespace ColourSpaceConverter
                     int S = ToS(R, G, B);
                     int V = ToV(R, G, B);
 
-                    int Proc = trackBar2.Value;
-                    if (Proc <= 100)
+                    
+                    if (Proc <= tb2)
                     {
-                        S = S * Proc / 100;
+                        S = S * Proc / tb2;
                     }
                     else
                     {
-                        S = 100 - S * (200 - Proc) / 100;
+                        S = 100 - S * (200 - Proc) / (200 - tb2);
                     }
-
+                    
                     R = ToR(H, S, V);
                     G = ToG(H, S, V);
                     B = ToB(H, S, V);
@@ -130,12 +155,18 @@ namespace ColourSpaceConverter
                     fast_newImageHSV[x, y] = newColor;
                 }
             }
-            } 
+            }
+            tb2 = Proc;
+            if (tb2 == 0)
+            {
+                tb2 = 1;
+            }
             pictureBox2.Image = newImageHSV;
         }
         //изменить яркость
         private void trackBar3_Scroll(object sender, EventArgs e)
         {
+            int Proc = trackBar3.Value;
             using (var fast_newImageHSV = new FastBitmap(newImageHSV))
             {
                 for (int x = 0; x < fast_newImageHSV.Width; x++)
@@ -150,16 +181,16 @@ namespace ColourSpaceConverter
                         int S = ToS(R, G, B);
                         int V = ToV(R, G, B);
 
-                        int Proc = trackBar3.Value;
-                        if (Proc <= 100)
+                        
+                        if (Proc <= tb3)
                         {
-                            V = V * Proc / 100;
+                            V = V * Proc / tb3;
                         }
                         else
                         {
-                            V = 100 - V * (200 - Proc) / 100;
+                            V = 100 - V * (200 - Proc) / (200 - tb3);
                         }
-
+                        
                         R = ToR(H, S, V);
                         G = ToG(H, S, V);
                         B = ToB(H, S, V);
@@ -168,6 +199,11 @@ namespace ColourSpaceConverter
                         fast_newImageHSV[x, y] = newColor;
                     }
                 }
+            }
+            tb3 = Proc;
+            if (tb3==0)
+            {
+                tb3 = 1;
             }
             pictureBox2.Image = newImageHSV;
         }
@@ -254,6 +290,10 @@ namespace ColourSpaceConverter
                     break;
             }
             t = t * 255 / 100;
+            if ((t<0)||(t>255))
+            {
+                t = 100;
+            }
             return t;
         }
         private int ToG(int H, int S, int V)
@@ -288,6 +328,10 @@ namespace ColourSpaceConverter
                 break;
             }
             t = t * 255 / 100;
+            if ((t < 0) || (t > 255))
+            {
+                t = 100;
+            }
             return t;
         }
         private int ToB(int H, int S, int V)
@@ -322,6 +366,10 @@ namespace ColourSpaceConverter
                     break;
             }
             t = t * 255 / 100;
+            if ((t < 0) || (t > 255))
+            {
+                t = 100;
+            }
             return t;
         }
     }
