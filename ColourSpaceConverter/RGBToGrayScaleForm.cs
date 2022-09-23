@@ -37,13 +37,13 @@ namespace ColourSpaceConverter
                 int h = bmp.Height;
                 Rectangle rect = new Rectangle(0, 0, w, h);
                 this.Size = new Size(w+pictureBox1.Location.X*3, h+89+pictureBox1.Location.Y);
+
+                button2.Enabled = true;
+                button3.Enabled = true;
+                button4.Enabled = true;
+                button5.Enabled = true;
             }
-            button2.Enabled = true;
-            button3.Enabled = true;
-            button4.Enabled = true ;
-            button5.Enabled = true;
         }
-       
 
         private void hdtv_gs(Bitmap bitmap)
         {
@@ -60,7 +60,6 @@ namespace ColourSpaceConverter
                         );
                     }
             }
-
         }
 
         private void hdtv2(Bitmap bitmap)
@@ -79,9 +78,7 @@ namespace ColourSpaceConverter
                         );
                     }
             }
-
         }
-
 
         private void diff(Bitmap bitmap)
         {
@@ -103,14 +100,11 @@ namespace ColourSpaceConverter
                         );
                     }
             }
-
         }
-
-
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Bitmap hdtv = pictureBox1.Image as Bitmap;
+            Bitmap hdtv = pictureBox1.Image.Clone() as Bitmap;
             hdtv_gs(hdtv);
             var newForm = new PictureForm(hdtv);
             newForm.Text = "Greyscale(HDTV)";
@@ -119,7 +113,7 @@ namespace ColourSpaceConverter
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Bitmap hdtv = pictureBox1.Image as Bitmap;
+            Bitmap hdtv = pictureBox1.Image.Clone() as Bitmap;
             hdtv2(hdtv);
             var newForm = new PictureForm(hdtv);
             newForm.Text = "Greyscale(simple)";
@@ -128,7 +122,7 @@ namespace ColourSpaceConverter
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Bitmap hdtv = pictureBox1.Image as Bitmap;
+            Bitmap hdtv = pictureBox1.Image.Clone() as Bitmap;
             diff(hdtv);
             var newForm = new PictureForm(hdtv);
             newForm.Text = "Greyscale(diff)";
@@ -167,7 +161,7 @@ namespace ColourSpaceConverter
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Bitmap bmp = pictureBox1.Image as Bitmap;
+            Bitmap bmp = pictureBox1.Image.Clone() as Bitmap;
             hdtv_gs(bmp);
 
             var newForm = new PictureForm(GShist(bmp));
