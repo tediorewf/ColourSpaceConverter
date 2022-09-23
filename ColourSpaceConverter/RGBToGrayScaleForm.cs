@@ -110,7 +110,7 @@ namespace ColourSpaceConverter
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Bitmap hdtv = pictureBox1.Image as Bitmap;
+            Bitmap hdtv = pictureBox1.Image.Clone() as Bitmap;
             hdtv_gs(hdtv);
             var newForm = new PictureForm(hdtv);
             newForm.Text = "Greyscale(HDTV)";
@@ -119,7 +119,7 @@ namespace ColourSpaceConverter
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Bitmap hdtv = pictureBox1.Image as Bitmap;
+            Bitmap hdtv = pictureBox1.Image.Clone() as Bitmap;
             hdtv2(hdtv);
             var newForm = new PictureForm(hdtv);
             newForm.Text = "Greyscale(simple)";
@@ -128,7 +128,7 @@ namespace ColourSpaceConverter
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Bitmap hdtv = pictureBox1.Image as Bitmap;
+            Bitmap hdtv = pictureBox1.Image.Clone() as Bitmap;
             diff(hdtv);
             var newForm = new PictureForm(hdtv);
             newForm.Text = "Greyscale(diff)";
